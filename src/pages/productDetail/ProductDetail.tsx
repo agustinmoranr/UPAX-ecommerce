@@ -3,6 +3,7 @@ import {
 	AddProductToCartButton,
 	useCart,
 	RemoveProductFromCartButton,
+	ProductActions,
 } from '../../components/CartProvider';
 
 import './productDetail.css';
@@ -52,20 +53,27 @@ export function ProductDetailPage() {
 						</span>
 						<p className='product-description'>{product.description}</p>
 						<strong className='product-price'>{product.price}$ MXN</strong>
-						<AddProductToCartButton
-							className='product-cta'
-							product_id={product.id}
-							size='large'>
-							Añadir al carrito
-						</AddProductToCartButton>
+						{quantity === 0 && (
+							<AddProductToCartButton
+								className='product-cta'
+								product_id={product.id}
+								size='large'>
+								Añadir al carrito
+							</AddProductToCartButton>
+						)}
+						{quantity > 0 && (
+							<ProductActions
+								product_id={product.id}
+								count={quantity}
+								style={{ width: '100%', justifyContent: 'space-between' }}
+							/>
+						)}
 						{quantity > 0 && (
 							<RemoveProductFromCartButton
 								className='product-cta'
 								product_id={product.id}
 								size='large'>
-								{quantity > 1
-									? 'Eliminar 1 del carrito'
-									: 'Eliminar del carrito'}
+								Eliminar del carrito
 							</RemoveProductFromCartButton>
 						)}
 						{quantity > 1 && (
