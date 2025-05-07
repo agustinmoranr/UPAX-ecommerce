@@ -14,13 +14,15 @@
 
 .logo {
 	flex-grow: 1;
-	flex-basis: 37%;
+	flex-shrink: 1;
+	flex-basis: 10%;
 }
 
 .search-and-cart {
 	display: flex;
 	align-items: center;
-	flex-basis: 38%;
+	flex-grow: 1;
+	flex-basis: 40%;
 	justify-content: flex-end;
 	gap: 1rem;
 }
@@ -30,12 +32,13 @@
 	color: inherit;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 1200px) {
 	.navbar-wrapper {
 		display: block;
 	}
 	.filters__by-category {
-		flex-basis: 25%;
+		flex-grow: 1;
+		flex-basis: 40%;
 	}
 
 	.search-bar {

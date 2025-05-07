@@ -8,7 +8,7 @@ import './navbarDesktop.css';
 import { useMediaQuery } from '../../../lib/hooks/useMediaQuery';
 
 function NavbarDesktop() {
-	const isDesktop = useMediaQuery('(min-width: 640px)');
+	const isDesktop = useMediaQuery('(min-width: 1200px)');
 	const location = useLocation();
 	const isHome = location.pathname === ROUTES.HOME;
 	return (
@@ -18,12 +18,24 @@ function NavbarDesktop() {
 					<div>Logo</div>
 				</NavLink>
 
-				{isDesktop && isHome && <CategoriesFilter />}
+				{isDesktop && isHome && (
+					<div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+						<span>Filtrar por categoría:</span>
+						<CategoriesFilter />
+					</div>
+				)}
 				<div className='search-and-cart'>
 					<SearchBar />
-					<CartNavButton />
+					<CartNavButton>
+						<span style={{ marginLeft: '0.5rem', whiteSpace: 'pre' }}>
+							Mi carrito
+						</span>
+					</CartNavButton>
 					<NavLink to={ROUTES.ACCOUNT}>
 						<User />
+						<span style={{ marginLeft: '0.5rem', whiteSpace: 'pre' }}>
+							Mi cuenta
+						</span>
 					</NavLink>
 				</div>
 			</nav>

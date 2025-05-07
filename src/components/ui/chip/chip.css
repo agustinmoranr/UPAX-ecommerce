@@ -3,7 +3,7 @@
 	align-items: center;
 	justify-content: center;
 	gap: 0.125rem;
-	padding: 0.25rem;
+	padding: 0.25rem 1.25rem;
 	border-radius: 1rem;
 	background-color: oklch(36.64% 0.045 199.75);
 	color: var(--background);
