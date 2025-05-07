@@ -15,7 +15,7 @@ function NavbarDesktop() {
 		<header className='navbar-wrapper'>
 			<nav className='navbar'>
 				<NavLink to={ROUTES.HOME} className='logo' style={{ color: 'inherit' }}>
-					<div>Logo</div>
+					<div style={{ fontSize: 'var(--h5)' }}>MellowStore</div>
 				</NavLink>
 
 				{isDesktop && isHome && (

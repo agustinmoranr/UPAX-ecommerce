@@ -21,13 +21,15 @@ function MyCartPage() {
 				</Link>
 				<h1>Mi Carrito</h1>
 				{totalProducts === 0 && (
-					<p>
+					<p style={{ fontSize: 'var(--h5)' }}>
 						Tu carrito esta vacío. Aún no has añadido ningún producto para
 						comprar.
 					</p>
 				)}
 				{totalProducts > 0 && (
-					<p>Bienvenido, estos son los productos que deseas comprar.</p>
+					<p style={{ fontSize: 'var(--h5)' }}>
+						Bienvenido, estos son los productos que deseas comprar.
+					</p>
 				)}
 				<div className='cart-glossary'>
 					<ul className='cart-list'>

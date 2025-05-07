@@ -8,6 +8,7 @@ import ProductDetail from './pages/productDetail/ProductDetail.tsx';
 import 'modern-css-reset/dist/reset.min.css';
 import './index.css';
 import MyCartPage from './pages/myCart/MyCartPage.tsx';
+import AccountPage from './pages/accountPage/AccountPage.tsx';
 
 const router = createBrowserRouter([
 	{
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: ROUTES.ACCOUNT,
-				Component: () => <div>my account page</div>,
+				Component: AccountPage,
 			},
 		],
 	},

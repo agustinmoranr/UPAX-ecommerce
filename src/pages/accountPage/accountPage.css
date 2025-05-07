@@ -1,0 +1,29 @@
+.account-page {
+}
+
+.account-title {
+}
+
+.account {
+	width: fit-content;
+	margin-inline: auto;
+}
+
+.account-img {
+	width: 100%;
+	height: 100%;
+}
+
+.account-details {
+	text-align: center;
+}
+.account-details h2 {
+	font-size: var(--h3);
+}
+
+@media (min-width: 640px) {
+	.account-img {
+		width: 500px;
+		height: 500px;
+	}
+}

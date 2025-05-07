@@ -21,7 +21,9 @@ function Homepage() {
 				<h1 className='homepage__title'>
 					MellowStore: Donde comprar es un placer.
 				</h1>
-				{isLoading && <span>Cargando productos...</span>}
+				{isLoading && (
+					<span style={{ fontSize: 'var(--h5)' }}>Cargando productos...</span>
+				)}
 				{isError && <ErrorMessage />}
 				{isSuccess && products && <ProductList products={_products} />}
 			</main>
@@ -34,7 +36,7 @@ export default Homepage;
 export function ErrorMessage() {
 	return (
 		<div>
-			<span>
+			<span style={{ fontSize: 'var(--h5)' }}>
 				Lo sentimos, ocurrió un error al cargar la lista de productos. Verifica
 				tu conectividad a internet o inténtalo más tarde.
 			</span>
