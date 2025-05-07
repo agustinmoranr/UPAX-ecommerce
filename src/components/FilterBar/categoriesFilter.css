@@ -1,0 +1,13 @@
+.filters__by-category {
+	width: 100%;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1rem;
+}
+
+.filters__by-category div {
+	flex-grow: 1;
+	text-align: center;
+}

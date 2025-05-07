@@ -1,0 +1,7 @@
+.filters {
+	/* --background: var(--text); */
+	background-color: var(--text);
+	color: var(--background);
+	padding-inline: 1rem;
+	padding-block: 1rem;
+}

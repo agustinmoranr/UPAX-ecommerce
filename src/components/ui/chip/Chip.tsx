@@ -9,8 +9,8 @@ export function Chip({
 	classNames?: { wrapper: string; element: string };
 }) {
 	return (
-		<div className={classNames.wrapper}>
-			<span className={`${classNames.wrapper} ${className}`} {...props} />
+		<div className='chip'>
+			<span {...props} />
 		</div>
 	);
 }
