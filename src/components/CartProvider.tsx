@@ -57,13 +57,11 @@ export function CartProvider({ children }: PropsWithChildren) {
 		setCart((state) => [...state, product]);
 	const removeProduct = (product_id: Product['id']) =>
 		setCart((state) => {
+			const index = state.findIndex((product) => product.id === product_id);
+			if (index === -1) return state;
 			const stateCopy = [...state];
-			const productsToDelete = stateCopy.filter(({ id }) => id === product_id);
-			productsToDelete.pop();
-			const productsWithoutDeleted = stateCopy.filter(
-				({ id }) => id !== product_id,
-			);
-			return [...productsToDelete, ...productsWithoutDeleted];
+			stateCopy.splice(index, 1);
+			return stateCopy;
 		});
 	const removeProductCompletely = (product_id: Product['id']) =>
 		setCart((state) => {
