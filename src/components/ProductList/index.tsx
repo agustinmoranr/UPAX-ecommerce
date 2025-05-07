@@ -2,12 +2,16 @@
 // import useAsync from '../../lib/hooks/useAsync';
 import { Button } from '../ui';
 import './index.css';
-import { Link } from 'react-router';
-import { ROUTES } from '../../lib/routes';
-import { Plus } from 'lucide-react';
+
+import { Plus, Trash } from 'lucide-react';
 // import CartPlusIcon from '../CartPlusIcon';
 
 import productCardStyles from './productCard.module.css';
+import {
+	AddProductToCartButton,
+	RemoveProductFromCartButton,
+	useCart,
+} from '../CartProvider';
 
 type Product = {
 	id: string;
@@ -28,11 +32,15 @@ export function ProductList({ products }: { products: Product[] | null }) {
 			{products?.map((product) => {
 				return (
 					<li key={product.id} className='product-item'>
-						<Link
+						{/* <Link
 							to={`${ROUTES.PRODUCT}/${product.id}`}
-							style={{ display: 'inline-flex', height: '100%' }}>
-							<ProductCard title={product.title} image={product.image} />
-						</Link>
+							style={{ display: 'inline-flex', height: '100%' }}> */}
+						<ProductCard
+							product_id={product.id}
+							title={product.title}
+							image={product.image}
+						/>
+						{/* </Link> */}
 					</li>
 				);
 			})}
@@ -40,19 +48,37 @@ export function ProductList({ products }: { products: Product[] | null }) {
 	);
 }
 
-function ProductCard({ image, title }: Pick<Product, 'title' | 'image'>) {
+function ProductCard({
+	product_id,
+	image,
+	title,
+}: Pick<Product, 'title' | 'image'> & { product_id: Product['id'] }) {
+	const { cart } = useCart();
+	const isProductInCart = cart.findIndex(({ id }) => id === product_id) === -1;
+
 	return (
 		<div className={productCardStyles.card} style={{ height: '100%' }}>
 			<img src={image} alt={'Imagen del producto'} />
 			<h3>{title}</h3>
-			<Button>
-				<span>Añadir al carrito</span>{' '}
-				<span>
-					<Plus size={18} />
-				</span>
-			</Button>
+			{isProductInCart ? (
+				<AddProductToCartButton product_id={product_id}>
+					<span>Añadir al carrito</span>{' '}
+					<span>
+						<Plus size={18} />
+					</span>
+				</AddProductToCartButton>
+			) : (
+				<RemoveProductFromCartButton product_id={product_id}>
+					<span>Quitar del carrito</span>{' '}
+					<span>
+						<Trash size={18} />
+					</span>
+				</RemoveProductFromCartButton>
+			)}
 		</div>
 	);
 }
 
 export default ProductList;
+
+<Button></Button>;

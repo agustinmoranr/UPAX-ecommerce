@@ -1,7 +1,8 @@
 import { NavLink } from 'react-router';
 import { ROUTES } from '../../../lib/routes';
-import { House, User, ShoppingCart } from 'lucide-react';
+import { House, User } from 'lucide-react';
 import './navbarMobile.css';
+import { CartNavButton } from '../../CartNavButton/CartNavButton';
 
 export function NavbarMobile() {
 	return (
@@ -10,10 +11,10 @@ export function NavbarMobile() {
 				<House size={20} />
 				<span>Inicio</span>
 			</NavLink>
-			<NavLink className='navbar-mobile__link' to={ROUTES.CART}>
-				<ShoppingCart size={20} />
+			<CartNavButton className='navbar-mobile__link'>
 				<span>Carrito</span>
-			</NavLink>
+			</CartNavButton>
+
 			<NavLink className='navbar-mobile__link' to={ROUTES.ACCOUNT}>
 				<User size={20} />
 				<span>Cuenta</span>

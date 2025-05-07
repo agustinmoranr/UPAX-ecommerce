@@ -9,13 +9,26 @@ type AsyncState<T> = {
 
 type AsyncAction<T> = Partial<AsyncState<T>>;
 
+export interface AsyncOutput<T> extends AsyncState<T> {
+	isIdle: boolean;
+	isLoading: boolean;
+	isError: boolean;
+	isSuccess: boolean;
+	setData: (data: T) => void;
+	setError: (error: unknown) => void;
+	run: (promise: Promise<T>) => Promise<T>;
+	reset: () => void;
+}
+
 const defaultInitialState: AsyncState<unknown> = {
 	status: 'idle',
 	data: null,
 	error: null,
 };
 
-export function useAsync<T>(initialState?: Partial<AsyncState<T>>) {
+export function useAsync<T>(
+	initialState?: Partial<AsyncState<T>>,
+): AsyncOutput<T> {
 	const initialStateRef = useRef<AsyncState<T>>({
 		...defaultInitialState,
 		...initialState,
