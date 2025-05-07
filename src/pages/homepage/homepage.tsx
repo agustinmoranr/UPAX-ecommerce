@@ -2,6 +2,7 @@ import FiltersBar from '../../components/FilterBar/FiltersBar';
 import './homepage.css';
 import ProductList from '../../components/ProductList';
 import { useCart } from '../../components/CartProvider';
+import { useEffect } from 'react';
 
 function Homepage() {
 	const { productsState } = useCart();
@@ -11,9 +12,13 @@ function Homepage() {
 		isLoading,
 		isError,
 		isSuccess,
+		clearFiltering,
 	} = productsState;
 	const _products =
 		filteredProducts.length > 0 ? filteredProducts : products ?? [];
+
+	useEffect(() => clearFiltering, []); //limpia filtrado cuando se desmonta el homepage
+
 	return (
 		<div>
 			<FiltersBar />
