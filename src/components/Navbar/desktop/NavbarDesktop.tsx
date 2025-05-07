@@ -12,7 +12,9 @@ function NavbarDesktop() {
 	return (
 		<header className='navbar-wrapper'>
 			<nav className='navbar'>
-				<div className='logo'>Logo</div>
+				<NavLink to={ROUTES.HOME} className='logo' style={{ color: 'inherit' }}>
+					<div>Logo</div>
+				</NavLink>
 
 				{isDesktop && <CategoriesFilter />}
 				<div className='search-and-cart'>

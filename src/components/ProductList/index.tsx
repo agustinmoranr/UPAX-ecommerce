@@ -1,10 +1,6 @@
-// import { useEffect } from 'react';
-// import useAsync from '../../lib/hooks/useAsync';
-import { Button } from '../ui';
-import './index.css';
+import { Link } from '../ui';
 
-import { Plus, Trash } from 'lucide-react';
-// import CartPlusIcon from '../CartPlusIcon';
+import { Plus, SquareArrowOutUpRight, Trash } from 'lucide-react';
 
 import productCardStyles from './productCard.module.css';
 import {
@@ -12,19 +8,10 @@ import {
 	RemoveProductFromCartButton,
 	useCart,
 } from '../CartProvider';
+import { ROUTES } from '../../lib/routes';
 
-type Product = {
-	id: string;
-	title: string;
-	price: number;
-	description: string;
-	category: string;
-	image: string;
-	rating: {
-		rate: number;
-		count: number;
-	};
-};
+import './index.css';
+import type { Product } from '../../lib/hooks/useProducts';
 
 export function ProductList({ products }: { products: Product[] | null }) {
 	return (
@@ -32,15 +19,11 @@ export function ProductList({ products }: { products: Product[] | null }) {
 			{products?.map((product) => {
 				return (
 					<li key={product.id} className='product-item'>
-						{/* <Link
-							to={`${ROUTES.PRODUCT}/${product.id}`}
-							style={{ display: 'inline-flex', height: '100%' }}> */}
 						<ProductCard
 							product_id={product.id}
 							title={product.title}
 							image={product.image}
 						/>
-						{/* </Link> */}
 					</li>
 				);
 			})}
@@ -58,8 +41,16 @@ function ProductCard({
 
 	return (
 		<div className={productCardStyles.card} style={{ height: '100%' }}>
-			<img src={image} alt={'Imagen del producto'} />
-			<h3>{title}</h3>
+			<Link
+				className={productCardStyles['card__link-wrapper']}
+				to={`${ROUTES.PRODUCT}/${product_id}`}>
+				<img src={image} alt={'Imagen del producto'} />
+				<h3>{title}</h3>
+			</Link>
+			<span className={productCardStyles['card__nav-detail']}>
+				Ver detalle del producto{' '}
+				<SquareArrowOutUpRight style={{ marginLeft: '0.25rem' }} />
+			</span>
 			{isProductInCart ? (
 				<AddProductToCartButton product_id={product_id}>
 					<span>Añadir al carrito</span>{' '}
@@ -80,5 +71,3 @@ function ProductCard({
 }
 
 export default ProductList;
-
-<Button></Button>;
