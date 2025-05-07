@@ -7,8 +7,14 @@
 	border-radius: 1rem;
 	padding-inline: 1rem;
 	padding-block: 0.5rem;
+	border: 1px solid #2d5053;
+	/* background-color: #ddeeee; */
 }
 
 .search-bar div input {
 	width: 100%;
+}
+
+.search-bar div label {
+	display: inline-flex;
 }

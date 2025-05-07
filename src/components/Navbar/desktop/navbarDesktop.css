@@ -1,0 +1,49 @@
+.navbar-wrapper {
+	display: none;
+	background-color: var(--text);
+	color: var(--background);
+}
+
+.navbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 60px;
+	padding-inline: 3rem;
+}
+
+.logo {
+	flex-grow: 1;
+	flex-basis: 37%;
+}
+
+.search-and-cart {
+	display: flex;
+	align-items: center;
+	flex-basis: 38%;
+	justify-content: flex-end;
+	gap: 1rem;
+}
+
+.search-and-cart a {
+	display: inline-flex;
+	color: inherit;
+}
+
+@media (min-width: 640px) {
+	.navbar-wrapper {
+		display: block;
+	}
+	.filters__by-category {
+		flex-basis: 25%;
+	}
+
+	.search-bar {
+		margin-right: 1rem;
+	}
+
+	.search-bar div input {
+		width: 100%;
+		min-width: 250px;
+	}
+}
