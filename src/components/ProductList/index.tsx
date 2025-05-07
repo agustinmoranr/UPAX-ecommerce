@@ -1,11 +1,11 @@
-import { useEffect } from 'react';
-import useAsync from '../../lib/hooks/useAsync';
+// import { useEffect } from 'react';
+// import useAsync from '../../lib/hooks/useAsync';
 import { Button } from '../ui';
 import './index.css';
 import { Link } from 'react-router';
 import { ROUTES } from '../../lib/routes';
 import { Plus } from 'lucide-react';
-import CartPlusIcon from '../CartPlusIcon';
+// import CartPlusIcon from '../CartPlusIcon';
 
 import productCardStyles from './productCard.module.css';
 

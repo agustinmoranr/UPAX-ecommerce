@@ -1,8 +1,7 @@
 import { NavLink } from 'react-router';
 import { ROUTES } from '../../../lib/routes';
-import { House, User, ShoppingCart, Menu } from 'lucide-react';
+import { House, User, ShoppingCart } from 'lucide-react';
 import './navbarMobile.css';
-import { Button } from '../../ui';
 
 export function NavbarMobile() {
 	return (

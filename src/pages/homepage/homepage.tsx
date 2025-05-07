@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import FiltersBar from '../../components/FilterBar/FiltersBar';
 import './homepage.css';
 import useAsync from '../../lib/hooks/useAsync';
-import { Button } from '../../components/ui';
+// import { Button } from '../../components/ui';
 import ProductList from '../../components/ProductList';
 
 const API_ENDPOINT_BASE = 'https://fakestoreapi.com';
@@ -61,7 +61,7 @@ function Homepage() {
 							Verifica tu conectividad a internet o inténtalo más tarde.
 						</span>
 						<br />
-						<code>{error?.message}</code>
+						{/* <code>{error?.message}</code> */}
 					</div>
 				)}
 				{isSuccess && products && <ProductList products={products} />}
