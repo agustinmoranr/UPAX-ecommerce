@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&family=Roboto:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&family=Roboto:wght@300;400;500;600&display=swap');
 
 :root {
 	/* color-scheme: light dark; */
@@ -77,6 +77,36 @@ body {
 	}
 }
 
+.product-actions {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	border-radius: 9999px;
+	border: solid 2px var(--secondary);
+	width: fit-content;
+}
+
+.product-actions button {
+	display: inline-flex;
+	padding: 0.5rem;
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+}
+
+.product-actions .add-button:hover {
+	background-color: var(--primary);
+}
+
+.product-actions .delete-button:hover {
+	background-color: oklch(0.59 0.16 21.39);
+	color: var(--background);
+}
+
+.product-actions span {
+	font-weight: 600;
+	font-size: 1.25rem;
+}
 /* button {
 	border-radius: 8px;
 	border: 1px solid transparent;

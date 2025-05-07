@@ -1,4 +1,4 @@
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import {
 	AddProductToCartButton,
 	useCart,
@@ -8,14 +8,13 @@ import {
 import './productDetail.css';
 import { ErrorMessage } from '../homepage/homepage';
 import { ArrowLeft } from 'lucide-react';
-import { Link } from '../../components/ui';
-import { ROUTES } from '../../lib/routes';
-
 export function ProductDetailPage() {
 	const { product_id } = useParams();
+	const navigate = useNavigate();
+
 	const {
 		getProductInCart,
-		productsState: { getProductById, data, isLoading, isError },
+		productsState: { getProductById, isLoading, isError },
 	} = useCart();
 
 	if (isLoading) {
@@ -34,13 +33,12 @@ export function ProductDetailPage() {
 		);
 	}
 	const { quantity } = getProductInCart(product.id);
-	console.log(data, product);
 	return (
 		<div>
 			<main className='page-content-dimensions'>
-				<Link className='go-back-link' to={ROUTES.HOME}>
+				<button className='go-back-link' onClick={() => navigate(-1)}>
 					<ArrowLeft /> Volver
-				</Link>
+				</button>
 				<div className='product-detail-page'>
 					<img
 						className='product-hero-image'

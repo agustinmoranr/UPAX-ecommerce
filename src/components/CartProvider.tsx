@@ -12,6 +12,7 @@ import useProducts, {
 	type Product,
 	type useProductsOutput,
 } from '../lib/hooks/useProducts';
+import { Plus, Trash } from 'lucide-react';
 
 type CartContextType = {
 	cart: Product[];
@@ -24,6 +25,7 @@ type CartContextType = {
 		product: Product;
 		quantity: number;
 	};
+	removeProductCompletely: (product_id: Product['id']) => void;
 };
 
 const CartContext = createContext<CartContextType | null>(null);
@@ -56,6 +58,14 @@ export function CartProvider({ children }: PropsWithChildren) {
 			);
 			return [...productsToDelete, ...productsWithoutDeleted];
 		});
+	const removeProductCompletely = (product_id: Product['id']) =>
+		setCart((state) => {
+			const stateCopy = [...state];
+			const productsToDelete = stateCopy.filter(({ id }) => id !== product_id);
+
+			return productsToDelete;
+		});
+
 	const getProductInCart = (product_id: Product['id']) => {
 		const productsInCart = cart.filter(({ id }) => id === product_id);
 
@@ -72,6 +82,7 @@ export function CartProvider({ children }: PropsWithChildren) {
 		addProduct,
 		removeProduct,
 		getProductInCart,
+		removeProductCompletely,
 	};
 
 	return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
@@ -110,10 +121,12 @@ export function RemoveProductFromCartButton({
 	product_id,
 	...props
 }: RemoveProductFromCartButtonProps) {
-	const { removeProduct } = useCart();
+	const { removeProductCompletely } = useCart();
 
 	const handleClick: ComponentProps<'button'>['onClick'] = (e) => {
-		removeProduct(product_id);
+		e.preventDefault();
+		e.stopPropagation();
+		removeProductCompletely(product_id);
 		if (typeof onClick === 'function') onClick(e);
 	};
 
@@ -123,5 +136,46 @@ export function RemoveProductFromCartButton({
 			onClick={handleClick}
 			{...props}
 		/>
+	);
+}
+
+export function ProductActions({
+	product_id,
+	count,
+}: {
+	product_id: Product['id'];
+	count: number;
+}) {
+	const { addProduct, removeProduct, productsState } = useCart();
+
+	const _removeProduct: ComponentProps<'button'>['onClick'] = (e) => {
+		e.stopPropagation();
+		e.preventDefault();
+
+		removeProduct(product_id);
+		// if (typeof onClick === 'function') onClick(e);
+	};
+
+	const _addProduct: ComponentProps<'button'>['onClick'] = (e) => {
+		e.stopPropagation();
+		e.preventDefault();
+
+		if (productsState && productsState.data) {
+			const product = productsState.data.find(({ id }) => id === product_id);
+			if (product) addProduct(product);
+		}
+		// if (typeof onClick === 'function') onClick(e);
+	};
+
+	return (
+		<div className='product-actions'>
+			<button onClick={_removeProduct} className='delete-button'>
+				<Trash strokeWidth={2.5} />
+			</button>
+			<span>{count}</span>
+			<button onClick={_addProduct} className='add-button'>
+				<Plus strokeWidth={2.5} />
+			</button>
+		</div>
 	);
 }

@@ -44,7 +44,6 @@ export function useProducts(): useProductsOutput {
 	function getProductById(product_id: Product['id']) {
 		return productsState.data?.find(({ id }) => id === product_id) ?? null;
 	}
-	console.log({ ...productsState, filteredProducts });
 
 	useEffect(() => {
 		async function listProducts() {

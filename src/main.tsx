@@ -3,10 +3,11 @@ import { createBrowserRouter, RouterProvider } from 'react-router';
 import { ROUTES } from './lib/routes.ts';
 import Layout from './components/Layout/Layout.tsx';
 import Homepage from './pages/homepage/homepage.tsx';
-import productDetail from './pages/productDetail/ProductDetail.tsx';
+import ProductDetail from './pages/productDetail/ProductDetail.tsx';
 
 import 'modern-css-reset/dist/reset.min.css';
 import './index.css';
+import MyCartPage from './pages/myCart/MyCartPage.tsx';
 
 const router = createBrowserRouter([
 	{
@@ -18,11 +19,11 @@ const router = createBrowserRouter([
 			},
 			{
 				path: `${ROUTES.PRODUCT}/:product_id`,
-				Component: productDetail,
+				Component: ProductDetail,
 			},
 			{
 				path: ROUTES.CART,
-				Component: () => <div>my cart page</div>,
+				Component: MyCartPage,
 			},
 			{
 				path: ROUTES.ACCOUNT,
