@@ -38,6 +38,12 @@
 	cursor: pointer;
 	font-size: var(--h5);
 }
+
+.card__nav-detail-content {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+}
 .card__link-wrapper:hover ~ .card__nav-detail,
 .card__nav-detail:hover {
 	visibility: visible;

@@ -1,7 +1,7 @@
 import CategoriesFilter from '../../FilterBar/CategoriesFilter';
 import SearchBar from '../../FilterBar/SearchBar';
 import { User } from 'lucide-react';
-import { NavLink } from 'react-router';
+import { NavLink, useLocation } from 'react-router';
 import { ROUTES } from '../../../lib/routes';
 import { CartNavButton } from '../../CartNavButton/CartNavButton';
 import './navbarDesktop.css';
@@ -9,6 +9,8 @@ import { useMediaQuery } from '../../../lib/hooks/useMediaQuery';
 
 function NavbarDesktop() {
 	const isDesktop = useMediaQuery('(min-width: 640px)');
+	const location = useLocation();
+	const isHome = location.pathname === ROUTES.HOME;
 	return (
 		<header className='navbar-wrapper'>
 			<nav className='navbar'>
@@ -16,7 +18,7 @@ function NavbarDesktop() {
 					<div>Logo</div>
 				</NavLink>
 
-				{isDesktop && <CategoriesFilter />}
+				{isDesktop && isHome && <CategoriesFilter />}
 				<div className='search-and-cart'>
 					<SearchBar />
 					<CartNavButton />

@@ -30,7 +30,7 @@ function Homepage() {
 
 export default Homepage;
 
-function ErrorMessage() {
+export function ErrorMessage() {
 	return (
 		<div>
 			<span>

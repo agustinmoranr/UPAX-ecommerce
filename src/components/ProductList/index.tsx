@@ -47,10 +47,14 @@ function ProductCard({
 				<img src={image} alt={'Imagen del producto'} />
 				<h3>{title}</h3>
 			</Link>
-			<span className={productCardStyles['card__nav-detail']}>
-				Ver detalle del producto{' '}
-				<SquareArrowOutUpRight style={{ marginLeft: '0.25rem' }} />
-			</span>
+			<Link
+				className={productCardStyles['card__nav-detail']}
+				to={`${ROUTES.PRODUCT}/${product_id}`}>
+				<span className={productCardStyles['card__nav-detail-content']}>
+					Ver detalle del producto{' '}
+					<SquareArrowOutUpRight style={{ marginLeft: '0.25rem' }} />
+				</span>
+			</Link>
 			{isProductInCart ? (
 				<AddProductToCartButton product_id={product_id}>
 					<span>Añadir al carrito</span>{' '}

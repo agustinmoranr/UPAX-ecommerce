@@ -7,26 +7,11 @@ ul.products-list {
 	padding-block: 3rem;
 }
 
-.page-content-dimensions {
-	padding-block: 2rem;
-	margin-inline: 6%;
-}
-
 @media (min-width: 640px) {
-	.homepage__title {
-		font-size: var(--h3);
-	}
 	ul.products-list {
 		padding-block: 4rem;
 	}
 	.page-content-dimensions {
 		margin-inline: 8%;
-	}
-}
-
-@media (min-width: 1200px) {
-	.page-content-dimensions {
-		margin-inline: 16%;
-		padding-block: 4rem;
 	}
 }

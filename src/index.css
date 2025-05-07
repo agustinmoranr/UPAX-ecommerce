@@ -59,6 +59,24 @@ body {
 	font-family: var(--font-montserrat);
 }
 
+.page-content-dimensions {
+	padding-block: 2rem;
+	margin-inline: 6%;
+}
+
+@media (min-width: 640px) {
+	.page-content-dimensions {
+		margin-inline: 8%;
+	}
+}
+
+@media (min-width: 1200px) {
+	.page-content-dimensions {
+		margin-inline: 16%;
+		padding-block: 4rem;
+	}
+}
+
 /* button {
 	border-radius: 8px;
 	border: 1px solid transparent;

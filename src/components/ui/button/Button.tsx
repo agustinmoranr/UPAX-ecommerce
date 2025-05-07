@@ -12,6 +12,7 @@ const button = cva(styles.base, {
 		size: {
 			small: styles.small,
 			medium: styles.medium,
+			large: styles.large,
 		},
 		disabled: {
 			false: styles.enabled,

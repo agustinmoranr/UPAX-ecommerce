@@ -2,7 +2,7 @@ import { useEffect, useState, type Dispatch } from 'react';
 import useAsync, { type AsyncOutput } from './useAsync';
 
 export type Product = {
-	id: string;
+	id: number;
 	title: string;
 	price: number;
 	description: string;
@@ -23,6 +23,7 @@ export interface useProductsOutput extends AsyncOutput<Product[]> {
 	setFilteredProducts: Dispatch<React.SetStateAction<Product[]>>;
 	filterByCategory: (categoryMatch: Categories) => void;
 	clearFiltering: () => void;
+	getProductById: (product_id: Product['id']) => Product | null;
 }
 
 export function useProducts(): useProductsOutput {
@@ -40,6 +41,9 @@ export function useProducts(): useProductsOutput {
 	function clearFiltering() {
 		setFilteredProducts([]);
 	}
+	function getProductById(product_id: Product['id']) {
+		return productsState.data?.find(({ id }) => id === product_id) ?? null;
+	}
 	console.log({ ...productsState, filteredProducts });
 
 	useEffect(() => {
@@ -56,6 +60,7 @@ export function useProducts(): useProductsOutput {
 		setFilteredProducts,
 		filterByCategory,
 		clearFiltering,
+		getProductById,
 		...productsState,
 	};
 }

@@ -3,6 +3,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router';
 import { ROUTES } from './lib/routes.ts';
 import Layout from './components/Layout/Layout.tsx';
 import Homepage from './pages/homepage/homepage.tsx';
+import productDetail from './pages/productDetail/ProductDetail.tsx';
+
 import 'modern-css-reset/dist/reset.min.css';
 import './index.css';
 
@@ -16,7 +18,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: `${ROUTES.PRODUCT}/:product_id`,
-				Component: () => <div>my product detail page </div>,
+				Component: productDetail,
 			},
 			{
 				path: ROUTES.CART,

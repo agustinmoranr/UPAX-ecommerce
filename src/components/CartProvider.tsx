@@ -6,22 +6,12 @@ import {
 	type Dispatch,
 	type PropsWithChildren,
 } from 'react';
-import { Button } from './ui';
+import { Button, type ButtonProps } from './ui';
 
-import useProducts, { type useProductsOutput } from '../lib/hooks/useProducts';
-
-type Product = {
-	id: string;
-	title: string;
-	price: number;
-	description: string;
-	category: string;
-	image: string;
-	rating: {
-		rate: number;
-		count: number;
-	};
-};
+import useProducts, {
+	type Product,
+	type useProductsOutput,
+} from '../lib/hooks/useProducts';
 
 type CartContextType = {
 	cart: Product[];
@@ -29,7 +19,11 @@ type CartContextType = {
 	productsState: useProductsOutput;
 	setCart: Dispatch<React.SetStateAction<Product[]>>;
 	addProduct: (product: Product) => void;
-	removeProduct: (product_id: string) => void;
+	removeProduct: (product_id: Product['id']) => void;
+	getProductInCart: (product_id: Product['id']) => {
+		product: Product;
+		quantity: number;
+	};
 };
 
 const CartContext = createContext<CartContextType | null>(null);
@@ -55,9 +49,19 @@ export function CartProvider({ children }: PropsWithChildren) {
 	const removeProduct = (product_id: Product['id']) =>
 		setCart((state) => {
 			const stateCopy = [...state];
-			const newProductsList = stateCopy.filter(({ id }) => id !== product_id);
-			return newProductsList;
+			const productsToDelete = stateCopy.filter(({ id }) => id === product_id);
+			productsToDelete.pop();
+			const productsWithoutDeleted = stateCopy.filter(
+				({ id }) => id !== product_id,
+			);
+			return [...productsToDelete, ...productsWithoutDeleted];
 		});
+	const getProductInCart = (product_id: Product['id']) => {
+		const productsInCart = cart.filter(({ id }) => id === product_id);
+
+		return { product: productsInCart[0], quantity: productsInCart.length };
+	};
+
 	const totalProducts = cart.length;
 
 	const value = {
@@ -67,6 +71,7 @@ export function CartProvider({ children }: PropsWithChildren) {
 		setCart,
 		addProduct,
 		removeProduct,
+		getProductInCart,
 	};
 
 	return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
@@ -74,7 +79,7 @@ export function CartProvider({ children }: PropsWithChildren) {
 
 export default CartProvider;
 
-interface AddProductToCartButtonProps extends ComponentProps<'button'> {
+interface AddProductToCartButtonProps extends ButtonProps {
 	product_id: Product['id'];
 }
 
@@ -96,7 +101,7 @@ export function AddProductToCartButton({
 	return <Button onClick={handleClick} {...props} />;
 }
 
-interface RemoveProductFromCartButtonProps extends ComponentProps<'button'> {
+interface RemoveProductFromCartButtonProps extends ButtonProps {
 	product_id: Product['id'];
 }
 
