@@ -6,9 +6,11 @@ import {
 	ProductActions,
 } from '../../components/CartProvider';
 
-import './productDetail.css';
 import { ErrorMessage } from '../homepage/homepage';
 import { ArrowLeft } from 'lucide-react';
+import { ROUTES } from '../../lib/routes';
+import { Button } from '../../components/ui';
+import './productDetail.css';
 export function ProductDetailPage() {
 	const { product_id } = useParams();
 	const navigate = useNavigate();
@@ -67,6 +69,14 @@ export function ProductDetailPage() {
 								count={quantity}
 								style={{ width: '100%', justifyContent: 'space-between' }}
 							/>
+						)}
+						{quantity > 0 && (
+							<Button
+								size='large'
+								className='product-cta'
+								onClick={() => navigate(ROUTES.CART)}>
+								Comprar Ahora
+							</Button>
 						)}
 						{quantity > 0 && (
 							<RemoveProductFromCartButton

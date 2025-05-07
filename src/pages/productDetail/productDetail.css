@@ -30,7 +30,7 @@
 }
 
 .product-cta {
-	width: calc(100% - 9%);
+	width: calc(100% - 13%);
 }
 
 @media (min-width: 1200px) {
