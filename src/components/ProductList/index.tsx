@@ -1,11 +1,11 @@
 import { Link } from '../ui';
 
-import { Plus, SquareArrowOutUpRight, Trash } from 'lucide-react';
+import { Plus, SquareArrowOutUpRight } from 'lucide-react';
 
 import productCardStyles from './productCard.module.css';
 import {
 	AddProductToCartButton,
-	RemoveProductFromCartButton,
+	ProductActions,
 	useCart,
 } from '../CartProvider';
 import { ROUTES } from '../../lib/routes';
@@ -35,10 +35,12 @@ function ProductCard({
 	product_id,
 	image,
 	title,
-}: Pick<Product, 'title' | 'image'> & { product_id: Product['id'] }) {
+}: Pick<Product, 'title' | 'image'> & {
+	product_id: Product['id'];
+}) {
 	const { cart } = useCart();
 	const isProductInCart = cart.findIndex(({ id }) => id === product_id) === -1;
-
+	const quantity = cart.filter(({ id }) => id === product_id).length;
 	return (
 		<div className={productCardStyles.card} style={{ height: '100%' }}>
 			<Link
@@ -55,20 +57,20 @@ function ProductCard({
 					<SquareArrowOutUpRight style={{ marginLeft: '0.25rem' }} />
 				</span>
 			</Link>
-			{isProductInCart ? (
+			{!isProductInCart && (
+				<ProductActions
+					product_id={product_id}
+					count={quantity}
+					style={{ width: '100%', justifyContent: 'space-between' }}
+				/>
+			)}
+			{isProductInCart && (
 				<AddProductToCartButton product_id={product_id}>
 					<span>Añadir al carrito</span>{' '}
 					<span>
 						<Plus size={18} />
 					</span>
 				</AddProductToCartButton>
-			) : (
-				<RemoveProductFromCartButton product_id={product_id}>
-					<span>Quitar del carrito</span>{' '}
-					<span>
-						<Trash size={18} />
-					</span>
-				</RemoveProductFromCartButton>
 			)}
 		</div>
 	);

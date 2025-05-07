@@ -6,30 +6,12 @@ import {
 import { ROUTES } from '../../lib/routes';
 import { Button, Link } from '../../components/ui';
 import { ArrowLeft, Trash } from 'lucide-react';
-import type { Product } from '../../lib/hooks/useProducts';
 import confetti from 'canvas-confetti';
 import './myCartPage.css';
 
-type ProductWithQuantity = Product & { quantity: number };
-
-function deduplicateWithQuantity(products: Product[]): ProductWithQuantity[] {
-	const map = new Map<number, ProductWithQuantity>();
-
-	for (const product of products) {
-		if (map.has(product.id)) {
-			map.get(product.id)!.quantity += 1;
-		} else {
-			map.set(product.id, { ...product, quantity: 1 });
-		}
-	}
-
-	return Array.from(map.values());
-}
-
 function MyCartPage() {
-	const { cart, totalProducts } = useCart();
+	const { cart, totalProducts, cartWithQuantity } = useCart();
 	const total = cart.reduce((acc, { price }) => acc + price, 0).toFixed(2);
-	const deduplicatedProducts = deduplicateWithQuantity(cart);
 
 	return (
 		<div>
@@ -49,7 +31,7 @@ function MyCartPage() {
 				)}
 				<div className='cart-glossary'>
 					<ul className='cart-list'>
-						{deduplicatedProducts.map((product) => (
+						{cartWithQuantity.map((product) => (
 							<li key={product.id}>
 								<Link
 									className='cart-item'
@@ -64,7 +46,6 @@ function MyCartPage() {
 										<span className='product-rating'>
 											Calificación: {product.rating.rate}/5
 										</span>
-										{/* <p className='product-description'>{product.description}</p> */}
 										<strong className='product-price'>
 											{product.price}$ MXN
 										</strong>

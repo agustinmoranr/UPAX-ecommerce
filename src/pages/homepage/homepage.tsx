@@ -12,7 +12,8 @@ function Homepage() {
 		isError,
 		isSuccess,
 	} = productsState;
-	const _products = filteredProducts.length > 0 ? filteredProducts : products;
+	const _products =
+		filteredProducts.length > 0 ? filteredProducts : products ?? [];
 	return (
 		<div>
 			<FiltersBar />

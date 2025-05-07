@@ -3,6 +3,7 @@ import {
 	useContext,
 	useState,
 	type ComponentProps,
+	type CSSProperties,
 	type Dispatch,
 	type PropsWithChildren,
 } from 'react';
@@ -13,9 +14,14 @@ import useProducts, {
 	type useProductsOutput,
 } from '../lib/hooks/useProducts';
 import { Plus, Trash } from 'lucide-react';
+import {
+	deduplicateWithQuantity,
+	type ProductWithQuantity,
+} from '../lib/deduplicateCart';
 
 type CartContextType = {
 	cart: Product[];
+	cartWithQuantity: ProductWithQuantity[];
 	totalProducts: number;
 	productsState: useProductsOutput;
 	setCart: Dispatch<React.SetStateAction<Product[]>>;
@@ -45,6 +51,7 @@ export function useCart() {
 export function CartProvider({ children }: PropsWithChildren) {
 	const [cart, setCart] = useState<Product[]>([]);
 	const productsState = useProducts();
+	const cartWithQuantity = deduplicateWithQuantity(cart);
 
 	const addProduct = (product: Product) =>
 		setCart((state) => [...state, product]);
@@ -76,6 +83,7 @@ export function CartProvider({ children }: PropsWithChildren) {
 
 	const value = {
 		cart,
+		cartWithQuantity,
 		totalProducts,
 		productsState,
 		setCart,
@@ -142,9 +150,11 @@ export function RemoveProductFromCartButton({
 export function ProductActions({
 	product_id,
 	count,
+	style,
 }: {
 	product_id: Product['id'];
 	count: number;
+	style?: CSSProperties | undefined;
 }) {
 	const { addProduct, removeProduct, productsState } = useCart();
 
@@ -168,7 +178,7 @@ export function ProductActions({
 	};
 
 	return (
-		<div className='product-actions'>
+		<div className='product-actions' style={style}>
 			<button onClick={_removeProduct} className='delete-button'>
 				<Trash strokeWidth={2.5} />
 			</button>
