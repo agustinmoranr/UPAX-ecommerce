@@ -1,8 +1,10 @@
 import FiltersBar from '../../components/FilterBar/FiltersBar';
-import './homepage.css';
 import ProductList from '../../components/ProductList';
 import { useCart } from '../../components/CartProvider';
 import { useEffect } from 'react';
+import PageContainer from '../../components/PageContainer/PageContainer';
+
+import './homepage.css';
 
 function Homepage() {
 	const { productsState } = useCart();
@@ -22,7 +24,7 @@ function Homepage() {
 	return (
 		<div>
 			<FiltersBar />
-			<main className='page-content-dimensions'>
+			<PageContainer>
 				<h1 className='homepage__title'>
 					MellowStore: Donde comprar es un placer.
 				</h1>
@@ -31,7 +33,7 @@ function Homepage() {
 				)}
 				{isError && <ErrorMessage />}
 				{isSuccess && products && <ProductList products={_products} />}
-			</main>
+			</PageContainer>
 		</div>
 	);
 }

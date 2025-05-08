@@ -1,0 +1,19 @@
+.page-container {
+	padding-top: 2rem;
+	padding-bottom: calc(2rem + var(--mobile-navbar-height));
+	margin-inline: 6%;
+}
+
+@media (min-width: 640px) {
+	.page-container {
+		margin-inline: 8%;
+	}
+}
+
+@media (min-width: 1200px) {
+	.page-container {
+		margin-inline: 16%;
+		padding-top: 4rem;
+		padding-bottom: calc(4rem + var(--mobile-navbar-height));
+	}
+}
