@@ -4,11 +4,11 @@ import { ROUTES } from './lib/routes.ts';
 import Layout from './components/Layout/Layout.tsx';
 import Homepage from './pages/homepage/homepage.tsx';
 import ProductDetail from './pages/productDetail/ProductDetail.tsx';
+import MyCartPage from './pages/myCart/MyCartPage.tsx';
+import AccountPage from './pages/accountPage/AccountPage.tsx';
 
 import 'modern-css-reset/dist/reset.min.css';
 import './index.css';
-import MyCartPage from './pages/myCart/MyCartPage.tsx';
-import AccountPage from './pages/accountPage/AccountPage.tsx';
 
 const router = createBrowserRouter([
 	{

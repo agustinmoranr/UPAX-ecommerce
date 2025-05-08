@@ -5,12 +5,12 @@ import {
 	RemoveProductFromCartButton,
 	ProductActions,
 } from '../../components/CartProvider';
-
 import { ErrorMessage } from '../homepage/homepage';
 import { ArrowLeft } from 'lucide-react';
 import { ROUTES } from '../../lib/routes';
 import { Button } from '../../components/ui';
 import './productDetail.css';
+
 export function ProductDetailPage() {
 	const { product_id } = useParams();
 	const navigate = useNavigate();
@@ -21,7 +21,7 @@ export function ProductDetailPage() {
 	} = useCart();
 
 	if (isLoading) {
-		return <span>Cargando...</span>;
+		return <span style={{ fontSize: 'var(--h5)' }}>Cargando...</span>;
 	}
 
 	if (isError) {
