@@ -22,7 +22,7 @@ export function ProductDetailPage() {
 		productsState: { getProductById, isLoading, isError },
 	} = useCart();
 
-	if (isLoading) {
+	if (isLoading || !product_id) {
 		return <span style={{ fontSize: 'var(--h5)' }}>Cargando...</span>;
 	}
 
@@ -30,7 +30,7 @@ export function ProductDetailPage() {
 		return <ErrorMessage />;
 	}
 
-	const product = getProductById(Number(product_id));
+	const product = getProductById(product_id);
 
 	if (!product) {
 		return (

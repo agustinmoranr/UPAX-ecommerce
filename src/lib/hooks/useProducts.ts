@@ -2,12 +2,13 @@ import { useEffect, useState, type Dispatch } from 'react';
 import useAsync, { type AsyncOutput } from './useAsync';
 
 export type Product = {
-	id: number;
+	id: string;
 	title: string;
 	price: number;
 	description: string;
 	category: string;
 	image: string;
+	stock: number;
 	rating: {
 		rate: number;
 		count: number;
@@ -15,10 +16,11 @@ export type Product = {
 };
 
 export type Categories = 'electronics' | 'clothing' | 'jewelery';
+export type ProductsData = { products: Product[]; totalCount: number };
 
-const API_ENDPOINT_BASE = 'https://fakestoreapi.com';
+const API_URL = import.meta.env.VITE_API_URL;
 
-export interface useProductsOutput extends AsyncOutput<Product[]> {
+export interface useProductsOutput extends AsyncOutput<ProductsData> {
 	filteredProducts: Product[];
 	setFilteredProducts: Dispatch<React.SetStateAction<Product[]>>;
 	filterByCategory: (categoryMatch: Categories) => void;
@@ -27,13 +29,16 @@ export interface useProductsOutput extends AsyncOutput<Product[]> {
 }
 
 export function useProducts(): useProductsOutput {
-	const productsState = useAsync<Product[]>({ data: [] });
+	const productsState = useAsync<ProductsData>({
+		data: { products: [], totalCount: 0 },
+	});
 	const { run } = productsState;
+	const products = productsState.data?.products;
 	const [filteredProducts, setFilteredProducts] = useState<Product[]>(
-		productsState.data ?? [],
+		products ?? [],
 	);
 	function filterByCategory(categoryMatch: Categories) {
-		const filteredProducts = productsState.data?.filter(({ category }) =>
+		const filteredProducts = products?.filter(({ category }) =>
 			category.includes(categoryMatch),
 		);
 		setFilteredProducts(filteredProducts ?? []);
@@ -42,12 +47,12 @@ export function useProducts(): useProductsOutput {
 		setFilteredProducts([]);
 	}
 	function getProductById(product_id: Product['id']) {
-		return productsState.data?.find(({ id }) => id === product_id) ?? null;
+		return products?.find(({ id }) => id === product_id) ?? null;
 	}
 
 	useEffect(() => {
 		async function listProducts() {
-			const response = await fetch(`${API_ENDPOINT_BASE}/products`);
+			const response = await fetch(`${API_URL}/products`);
 			return response.json();
 		}
 

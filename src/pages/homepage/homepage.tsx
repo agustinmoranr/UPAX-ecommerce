@@ -9,7 +9,7 @@ import './homepage.css';
 function Homepage() {
 	const { productsState } = useCart();
 	const {
-		data: products,
+		data,
 		filteredProducts,
 		isLoading,
 		isError,
@@ -17,7 +17,7 @@ function Homepage() {
 		clearFiltering,
 	} = productsState;
 	const _products =
-		filteredProducts.length > 0 ? filteredProducts : products ?? [];
+		filteredProducts.length > 0 ? filteredProducts : data?.products ?? [];
 
 	useEffect(() => clearFiltering, []); //limpia filtrado cuando se desmonta el homepage
 
@@ -32,7 +32,7 @@ function Homepage() {
 					<span style={{ fontSize: 'var(--h5)' }}>Cargando productos...</span>
 				)}
 				{isError && <ErrorMessage />}
-				{isSuccess && products && <ProductList products={_products} />}
+				{isSuccess && data?.products && <ProductList products={_products} />}
 			</PageContainer>
 		</div>
 	);

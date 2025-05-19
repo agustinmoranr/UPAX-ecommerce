@@ -109,7 +109,9 @@ export function AddProductToCartButton({
 
 	const handleClick: ComponentProps<'button'>['onClick'] = (e) => {
 		if (productsState && productsState.data) {
-			const product = productsState.data.find(({ id }) => id === product_id);
+			const product = productsState.data.products.find(
+				({ id }) => id === product_id,
+			);
 			if (product) addProduct(product);
 		}
 		if (typeof onClick === 'function') onClick(e);
@@ -169,7 +171,9 @@ export function ProductActions({
 		e.preventDefault();
 
 		if (productsState && productsState.data) {
-			const product = productsState.data.find(({ id }) => id === product_id);
+			const product = productsState.data.products.find(
+				({ id }) => id === product_id,
+			);
 			if (product) addProduct(product);
 		}
 		// if (typeof onClick === 'function') onClick(e);
