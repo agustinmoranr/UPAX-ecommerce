@@ -5,7 +5,7 @@ export type ProductWithQuantity = Product & { quantity: number };
 export function deduplicateWithQuantity(
 	products: Product[],
 ): ProductWithQuantity[] {
-	const map = new Map<number, ProductWithQuantity>();
+	const map = new Map<Product['id'], ProductWithQuantity>();
 
 	for (const product of products) {
 		if (map.has(product.id)) {
